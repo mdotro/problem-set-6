@@ -11,7 +11,9 @@
  */
 
 function sayHello() {
-
+  let nfl = document.getElementById('canvas1').getContext('2d');
+  nfl.font = '48px sans-serif'
+  nfl.strokeText('Hello, world!', 10, 50)
 }
 
 /*
@@ -38,6 +40,26 @@ function sayHello() {
  */
 
 function drawRectangle() {
+let mlb = document.getElementById('canvas2').getContext('2d');
+
+let height = prompt('Height:');
+  while (Number(height) < 1) {
+    height = prompt("Height:");
+  }
+let width = prompt("Width:");
+  while (Number(width) < 1) {
+    width = prompt("Width:");
+  }
+let x = prompt("X:");
+  while (Number(x) < 5) {
+    x = prompt("X:");
+  }
+let y = prompt("Y:");
+  while (Number(y) < 5) {
+    y = prompt("Y:");
+  }
+
+mlb.strokeRect(x, y, height, width);
 
 }
 
@@ -67,7 +89,13 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
-
+let nba = prompt('Color:');
+while (nba != "black" && nba != "blue" && nba != "green" && nba != "orange" && nba != "purple" && nba != "red" && nba != "yellow") {
+  nba = prompt('Color:');
+}
+let nfl = document.getElementById('canvas3').getContext('2d');
+nfl.fillStyle = color;
+nfl.
 }
 
 /*
