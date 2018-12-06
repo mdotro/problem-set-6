@@ -40,26 +40,33 @@ function sayHello() {
  */
 
 function drawRectangle() {
-let mlb = document.getElementById('canvas2').getContext('2d');
+let canvas = document.getElementById('canvas2');
+let context = canvas.getContext('2d');
 
-let height = prompt('Height:');
-  while (Number(height) < 1) {
-    height = prompt("Height:");
-  }
-let width = prompt("Width:");
-  while (Number(width) < 1) {
-    width = prompt("Width:");
-  }
+let height = prompt("Height:");
+let width = prompt("Width");
 let x = prompt("X:");
-  while (Number(x) < 5) {
-    x = prompt("X:");
-  }
 let y = prompt("Y:");
-  while (Number(y) < 5) {
-    y = prompt("Y:");
-  }
 
-mlb.strokeRect(x, y, height, width);
+height = Number(height);
+width = Number(width);
+x = Number(x);
+y = Number(y);
+
+if (isNaN(height) == true || isNaN(width) == true || isNaN(x) == true || isNaN(y) == true) {
+  alert("One of your inputs is not a number.");
+} else if (height < 1) {
+  alert("Your height is too small.");
+} else if (width < 1) {
+  alert("Your width is too small.");
+} else if (x < 5) {
+  alert("Your X value is too small.");
+} else if (y < 5) {
+  alert("Your Y value is too small.");
+}
+
+
+context.strokeRect(x, y, height, width);
 
 }
 
@@ -89,14 +96,18 @@ mlb.strokeRect(x, y, height, width);
  */
 
 function drawColoredRectangle() {
+let canvas = document.getElementById('canvas3')
+let context = canvas.getContext('2d');
 let nba = prompt('Color:');
-while (nba != "black" && nba != "blue" && nba != "green" && nba != "orange" && nba != "purple" && nba != "red" && nba != "yellow") {
-  nba = prompt('Color:');
+String(nba);
+if (nba == "black" || nba == "blue" || nba == "green" || nba == "orange" || nba == "purple" || nba == "red" ||nba == "yellow") {
+context.rect(10, 10, 100, 50);
+context.fillStyle = nba;
+context.fill();
+} else {
+  alert("This is an invalid color.");
 }
-let nfl = document.getElementById('canvas3').getContext('2d');
-nfl.fillStyle = color;
-nfl.
-}
+  }
 
 /*
  * Triangle. 5 points.
