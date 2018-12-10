@@ -139,7 +139,20 @@ context.fill();
  */
 
 function drawTriangle() {
-
+let canvas = document.getElementById('canvas4');
+let side1 = prompt("Side 1:");
+let side2 = prompt("Side 2:");
+let side3 = prompt("Side 3:");
+let context = canvas.getContext('2d');
+if (side1 == Number(side1) && side2 == Number(side2) && side3 == Number(side3)){
+Number(side1);
+Number(side2);
+Number(side3);
+let side1Squared = (side1 * side1);
+let side2Squared = (side2 * side2);
+let side3Squared = (side3 * side3);
+let side1andside2 = (side1Squared + side2Squared);
+(side3Squared == side1andside2);
 }
 
 /*
