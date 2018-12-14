@@ -153,8 +153,8 @@ let side2Squared = (side2 * side2);
 let side3Squared = (side3 * side3);
 let side1andside2 = (side1Squared + side2Squared);
 (side3Squared == side1andside2);
+  }
 }
-
 /*
  * Smile. 7 points.
  *
@@ -175,7 +175,8 @@ let side1andside2 = (side1Squared + side2Squared);
  */
 
 function drawSmileyFace() {
-
+let canvas = document.getElementById('canvas5');
+let ctx = canvas.getContext('2d');
 }
 
 /*
@@ -216,7 +217,26 @@ function drawStar() {
  */
 
 function drawStopSign() {
-
+  let radius = 40 / Math.sin(0.125 * Math.PI);
+  let canvas = document.getElementById('canvas7');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.moveTo(Math.cos(0.125 * Math.PI) * radius + 110, Math.sin(0.125 * Math.PI) * radius + 110);
+  let m = 0;
+  let angle = 0.25 * Math.PI;
+  while (m < 8) {
+    ctx.lineTo(Math.cos(0.125 * Math.PI + angle) * radius + 110, Math.sin(0.125 * Math.PI + angle) * radius + 110);
+    angle = angle + 0.25 * Math.PI;
+    m = m + 1;
+  }
+ctx.closePath();
+ctx.fillStyle = "red" ;
+ctx.fill();
+ctx.font = "68px Arial";
+ctx.fillStyle = "white";
+ctx.fillText("STOP", 15, 130);
+linesWidth = 1;
 }
 
 /*
@@ -238,7 +258,34 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
+let length = prompt("Length:");
+length = Number(length);
+let canvas = document.getElementById('canvas8');
+let ctx = canvas.getContext('2d');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+if (isNaN(length) = true) {
+  alert("Your input is not a number.");
+} else if (length > 100.2) {
+  alert("Your pyramid does not fit the canvas.");
+} else {
+ctx.beginPath();
+let m = 0;
+let limit = 5;
+let offset1 = 0;
+let offset2 = 0;
+let d = 0;
+let initialOffset = 0;
+while (d < 5){
+  while (m < limit){
+    ctx.strokeRect(10 + offset1 + initialOffset, canvas.height - 10 - offset2, length, length);
+    offset1 = offset1 + 10;
+    m++;
+  }
+  d++;
+  m = 0;
+  let
+}
 }
 
 /*
