@@ -11,9 +11,9 @@
  */
 
 function sayHello() {
-  let nfl = document.getElementById('canvas1').getContext('2d');
-  nfl.font = '48px sans-serif'
-  nfl.strokeText('Hello, world!', 10, 50)
+  let canvas = document.getElementById('canvas1').getContext('2d');
+  canvas.font = '48px sans-serif'
+  canvas.strokeText('Hello, world!', 10, 50)
 }
 
 /*
@@ -41,7 +41,7 @@ function sayHello() {
 
 function drawRectangle() {
 let canvas = document.getElementById('canvas2');
-let context = canvas.getContext('2d');
+let ctx = canvas.getContext('2d');
 
 let height = prompt("Height:");
 let width = prompt("Width");
@@ -97,13 +97,13 @@ context.strokeRect(x, y, height, width);
 
 function drawColoredRectangle() {
 let canvas = document.getElementById('canvas3')
-let context = canvas.getContext('2d');
+let ctx = canvas.getContext('2d');
 let nba = prompt('Color:');
 String(nba);
 if (nba == "black" || nba == "blue" || nba == "green" || nba == "orange" || nba == "purple" || nba == "red" ||nba == "yellow") {
-context.rect(10, 10, 100, 50);
-context.fillStyle = nba;
-context.fill();
+ctx.rect(10, 10, 100, 50);
+ctx.fillStyle = nba;
+ctx.fill();
 } else {
   alert("This is an invalid color.");
 }
@@ -139,20 +139,36 @@ context.fill();
  */
 
 function drawTriangle() {
-let canvas = document.getElementById('canvas4');
-let side1 = prompt("Side 1:");
-let side2 = prompt("Side 2:");
-let side3 = prompt("Side 3:");
-let context = canvas.getContext('2d');
-if (side1 == Number(side1) && side2 == Number(side2) && side3 == Number(side3)){
-Number(side1);
-Number(side2);
-Number(side3);
-let side1Squared = (side1 * side1);
-let side2Squared = (side2 * side2);
-let side3Squared = (side3 * side3);
-let side1andside2 = (side1Squared + side2Squared);
-(side3Squared == side1andside2);
+let x = 10;
+  let y = 10;
+  let line1;
+  let line2;
+  let line3;
+  let canvas = document.getElementById("canvas4");
+  let ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  while(true){
+	line1 = Number(prompt("Enter side 1 length"));
+	line2 = Number(prompt("Enter side 2 length"));
+	line3 = Number(prompt("Enter hypotenuse length"));
+	if(((line1**2) + (line2**2) == (line3**2)) && line1>0 && line2>0 && line3>0 && canvas.width-x-line1>=0 && canvas.height-y-line2>=0){
+		break;
+	} else {
+		alert("That is not a valid triangle")
+  	}
+  }
+ ctx.beginPath(); 
+ ctx.moveTo(x,y); 
+ ctx.lineTo(x,y+line1); 
+ ctx.stroke(); 
+ ctx.beginPath();
+ ctx.moveTo(x,y+line1);
+ ctx.lineTo(x+line2,y+line1);
+ ctx.stroke();
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.lineTo(x+line2,y+line1);
+ ctx.stroke();
   }
 }
 /*
@@ -175,8 +191,35 @@ let side1andside2 = (side1Squared + side2Squared);
  */
 
 function drawSmileyFace() {
-let canvas = document.getElementById('canvas5');
-let ctx = canvas.getContext('2d');
+  let radius;
+  let canvas = document.getElementById('canvas5');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	while(true){
+		radius = Number(prompt("Please enter a good radius please"));
+		if(radius>=1 && radius<=canvas.width && Number.isInteger(radius)){
+			break;
+		}
+	}
+  let x = canvas.width;
+  let y = canvas.height;
+  let eyes = radius*.1
+  let mouth = radius*.7
+  ctx.beginPath();
+  ctx.arc(x/2, y/2, radius, 0, Math.PI*2); 
+  ctx.stroke();
+
+  ctx.beginPath(); 
+  ctx.arc(x/2 - radius/3, y/2-radius/4, eyes,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath(); 
+  ctx.arc(x/2+radius/3, y/2-radius/4, eyes,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath(); 
+  ctx.arc(x/2, y/2, mouth,0, Math.PI);
+  ctx.stroke();
 }
 
 /*
@@ -198,7 +241,37 @@ let ctx = canvas.getContext('2d');
  */
 
 function drawStar() {
+let canvas = document.getElementById('canvas6');
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      let outerRadius = Number(prompt("Please enter a vaild outer radius"));
+      let innerRadius = Number(prompt("Please enter a valid inner radius"));
+      if (outerRadius>=innerRadius && canvas.width>=outerRadius+125 && canvas.height>=outerRadius+125 && innerRadius>=1 && outerRadius>=1){
+        let points = 5;
+        let outerx = [];
+        let outery = [];
+        let innerx = [];
+        let innery = [];
+        for(let x = 0;x<points;x++){
+          outerx.push(Math.cos((Math.PI*2*x)/points-(Math.PI/2))*outerRadius+125);
+          outery.push(Math.sin((Math.PI*2*x)/points-(Math.PI/2))*outerRadius+125);
+          innerx.push(Math.cos(((Math.PI*2*x)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+          innery.push(Math.sin(((Math.PI*2*x)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+        }
+        ctx.beginPath();
+        ctx.moveTo(outerx[0], outery[0]);
+        for(let y = 0;y<outerx.length;y++){
+          ctx.lineTo(innerx[y], innery[y]);
+          ctx.lineTo(outerx[y+1], outery[y+1]);
+        }
+        ctx.lineTo(outerx[0], outery[0]);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    else{
+        alert('This is an invalid value.');
+      }
 }
 
 /*
@@ -258,34 +331,25 @@ linesWidth = 1;
  */
 
 function drawPyramid() {
-let length = prompt("Length:");
-length = Number(length);
-let canvas = document.getElementById('canvas8');
-let ctx = canvas.getContext('2d');
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-if (isNaN(length) = true) {
-  alert("Your input is not a number.");
-} else if (length > 100.2) {
-  alert("Your pyramid does not fit the canvas.");
-} else {
-ctx.beginPath();
-let m = 0;
-let limit = 5;
-let offset1 = 0;
-let offset2 = 0;
-let d = 0;
-let initialOffset = 0;
-while (d < 5){
-  while (m < limit){
-    ctx.strokeRect(10 + offset1 + initialOffset, canvas.height - 10 - offset2, length, length);
-    offset1 = offset1 + 10;
+ let canvas = document.getElementById('canvas8');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let side = Number(prompt("Please enter a side length"));
+  let x = 10;
+  let y = canvas.height-10;
+  let m = 0;
+  let line = 1;
+  while(m<5){
+    for(let d=0+line;d<=5;d++){
+      ctx.strokeRect(x,y-side,side,side);
+      x+=side;
+    }
+    x=10+(side/2)*line;
+    y-=side;
+    line++;
     m++;
   }
-  d++;
-  m = 0;
-  let
-}
+
 }
 
 /*
@@ -318,5 +382,47 @@ while (d < 5){
  */
 
 function drawHouse() {
+let canvas = document.getElementById('canvas9');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  while(true){
+  let door = prompt("Enter a color for the Door");
+  let house = prompt("Enter a color for the House");
+  if((door =="brown" || door =="blue" || door =="green" || door =="orange" || door =="purple" || door =="red" || door =="yellow")
+  && (house =="brown" || house =="blue" || house =="green" || house =="orange" || house =="purple" || house =="red" || house =="yellow")) {
+    break;
+  }
+  else{
+      alert("One or more of your colors is invalid")
+  }
+}
+let x = 150;
+let houseLength = 576;
+let houseHeight = 400;
+let y = canvas.height-houseHeight-10;
+ctx.beginPath();
+ctx.fillStyle = house;
+ctx.fillRect(x,y,houseLength,houseHeight);
+ctx.fillStyle = door;
+ctx.fillRect(x+(houseLength/2)-30,y+300,60,100);
+ctx.strokeRect(x+(houseLength/2)-30,y+300,60,100);
+ctx.stroke();
+ctx.fillStyle="gray";
+ctx.moveTo(x,y);
+ctx.lineTo(x+286,150);
+ctx.lineTo(x+houseLength,y);
+ctx.lineTo(x,y);
+ctx.fill();
+ctx.fillStyle="#ADD8E6";
+ctx.fillRect(300,y+100, 50, 50);
+ctx.fillRect(526,y+100, 50, 50);
+ctx.fillRect(300,y+200, 50, 50);
+ctx.fillRect(526,y+200, 50, 50);
+ctx.closePath();
+ctx.beginPath();
+ctx.fillStyle='black';
+ctx.arc(450, 700, 6, 0, Math.PI*2);
+ctx.fill();
+ctx.closePath()
 }
